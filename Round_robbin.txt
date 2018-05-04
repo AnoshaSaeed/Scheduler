@@ -1,0 +1,83 @@
+s=[]
+
+total_wait=[]
+
+t_burst=[]
+
+finish=[]
+
+total=0
+
+quantum=int (raw_input('Enter quantum time: '))
+
+n=int(raw_input('Total number of processes: '))
+
+
+
+
+
+
+for i in xrange(n):
+	
+		s.append([])
+	
+	s[i].append(raw_input('Enter process name: '))	
+	
+	s[i].append(int(raw_input('Enter arrival time: ')))
+	
+		s[i].append(int(raw_input('Enter burst time: ')))	
+	
+	s[i].append(s[i][2]) #remaining burst time
+
+		total+=s[i][2] 
+		s[i].append(0)
+
+
+		s.sort(key=lambda s:s[1])
+
+		x=0
+
+		current=s[x][1]
+
+while total>0:
+
+	if s[x][3]<quantum and s[x][3]!=0 and s[x][1]<=current:
+
+			total=total-s[x][3]
+
+			current=current+s[x][3]
+	
+			s[x][4]=current
+	
+			s[x][3]=0
+
+	
+	elif s[x][3]>=quantum and s[x][1]<=current:
+	
+			s[x][3]=s[x][3]-quantum
+
+			current=current+quantum
+
+			total=total-quantum
+
+	if s[x][3]==0:
+	
+			s[x][4]=current
+	
+	if (x+1)<n:
+
+			x=x+1
+	
+	else:
+	
+			x=0
+
+
+
+		print 'Process  \t  Arrival time \t  Burst time \t  waiting time'
+
+
+
+for i in xrange(n):
+
+	print s[i][0],' \t\t',s[i][1],' \t\t',s[i][2],' \t\t',s[i][4]-s[i][1]-s[i][2]

@@ -1,0 +1,38 @@
+
+b=[]
+
+total_wait=[]
+
+n=int(raw_input('Total number of process: '))
+
+starttime=0
+
+total=0
+
+
+for i in xrange(n):
+	
+		b.append([])
+
+		b[i].append(raw_input('Enter name of the process: '))
+
+		b[i].append(int(raw_input('Enter time of arrival : ')))
+	
+		b[i].append(int(raw_input('Enter burst time: ')))
+	
+	total_wait.append([])
+	
+	total_wait[i].append(int(starttime-b[i][1]))
+	
+		starttime=starttime+b[i][2]
+
+
+		b.sort(key=lambda b:b[1])
+
+		print 'Process \t Arrival time \t Burst time \t waiting time'
+
+
+for i in xrange(n):
+
+		print b[i][0], '\t\t' ,b[i][1], ' \t\t' ,b[i][2], ' \t\t' ,total_wait[i]
+
